@@ -1,10 +1,9 @@
 import os
 import git
-from git import Repo, Remote
 import dearpygui.dearpygui as dpg
 import zipfile
 instanceDir = ""
-workingDir = "E:\\Testcase"
+workingDir = ""
 
 
 def clonerepo():
@@ -21,19 +20,22 @@ def main():
         clonerepo()
     except git.GitCommandError:
         print("repo found in directory!")
-    repo = git.Repo.init(workingDir)
-    origin = repo.remote()
-    origin.fetch()
-    os.chdir(workingDir)
-    os.system("git lfs pull")
+    finally:
+        repo = git.Repo.init(workingDir)
+        origin = repo.remote()
+        origin.fetch()
+        os.chdir(workingDir)
+        os.system("git lfs pull")
 
 if __name__ == '__main__':
     dpg.create_context()
     with dpg.window(width=600, height=100):
         def setinstance():
+            global instanceDir
             instanceDir = dpg.get_value(input_txt1)
 
         def setworkingdir():
+            global workingDir
             workingDir = dpg.get_value(input_txt2)
         input_txt1 = dpg.add_input_text(
             label="Instance Directory"
