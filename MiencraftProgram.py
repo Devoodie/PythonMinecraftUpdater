@@ -2,14 +2,13 @@ import os
 import git
 from git import Repo, Remote
 import dearpygui.dearpygui as dpg
-# instancePath = input("Enter the Mods Instance Path!")
 import zipfile
 instanceDir = ""
 workingDir = "E:\\Testcase"
 
 
 def clonerepo():
-    git.Repo.clone_from('https://github.com/Devoodie/Madlib.git', workingDir, branch="main")
+    git.Repo.clone_from('https://github.com/BicBoiTaco/Codys-Perfect-Modpack.git', workingDir, branch="main")
 
 
 def unzip():
@@ -25,6 +24,8 @@ def main():
     repo = git.Repo.init(workingDir)
     origin = repo.remote()
     origin.fetch()
+    os.chdir(workingDir)
+    os.system("git lfs pull")
 
 if __name__ == '__main__':
     dpg.create_context()
