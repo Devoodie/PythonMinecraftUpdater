@@ -10,8 +10,11 @@ def clonerepo():
     git.Repo.clone_from('https://github.com/BicBoiTaco/Codys-Perfect-Modpack.git', workingDir, branch="main")
 
 
-def unzip():
-    with zipfile.ZipFile(workingDir+"\\mods.zip") as mods:
+def unzip(directory):
+    os.chdir(directory)
+    if os.path.exists(os.getcwd()+"\\mods"):
+        os.rmdir(os.getcwd()+"\\mods")
+    with zipfile.ZipFile(str(workingDir)+"\\mods.zip") as mods:
         mods.extractall(instanceDir)
 
 
@@ -26,6 +29,8 @@ def main():
         origin.fetch()
         os.chdir(workingDir)
         os.system("git lfs pull")
+    unzip(instanceDir)
+
 
 if __name__ == '__main__':
     dpg.create_context()
