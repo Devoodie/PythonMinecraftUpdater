@@ -16,7 +16,7 @@ def unzip(directory):
         os.rmdir(os.getcwd()+"\\mods")
     with zipfile.ZipFile(str(workingDir)+"\\mods.zip") as mods:
         mods.extractall(instanceDir)
-
+    print(f"unzipped ar {instanceDir}")
 
 def main():
     try:
@@ -48,7 +48,7 @@ if __name__ == '__main__':
         # The value for input_text2 will have a starting value
         # of "This is a default value!"
         input_txt2 = dpg.add_input_text(
-            label="Script Directory",
+            label="Download Directory",
             default_value=os.getcwd(),
         )
         button = dpg.add_button(tag="xmit", label="Submit!")
